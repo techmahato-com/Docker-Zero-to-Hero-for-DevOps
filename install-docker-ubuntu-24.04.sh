@@ -32,4 +32,18 @@ echo "🐳 Installing Docker Engine and CLI..."
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 echo "🚀 Starting Docker..."
-sudo
+sudo systemctl start docker
+
+echo "✅ Enabling Docker on system boot..."
+sudo systemctl enable docker
+
+echo "👤 Adding user '$USER' to docker group..."
+sudo usermod -aG docker $USER
+
+echo "🔍 Docker version check:"
+docker --version || echo "⚠️ You may need to log out and log back in to use Docker without sudo."
+
+echo "🧪 Running hello-world container to verify..."
+docker run hello-world || echo "✅ Docker installed. Please re-login for non-sudo access."
+
+echo "🎉 Docker installed successfully on Ubuntu 24.04!"
